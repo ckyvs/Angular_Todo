@@ -15,7 +15,7 @@ export class TodosListComponent implements OnInit {
   todos = [
     new Todo(1, 'Reach target to complete writing the book', false, new Date),
     new Todo(2, 'Reach target to read a book', false, new Date),
-    new Todo(3, 'Reach target to write code for project', false, new Date)
+    new Todo(3, 'Reach target to complete code target', false, new Date)
   ]
   // todo = {
   //   id : 1,
