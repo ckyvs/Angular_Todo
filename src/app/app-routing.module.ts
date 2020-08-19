@@ -4,12 +4,16 @@ import { LoginComponent } from './login/login.component';
 import { GreetComponent } from './greet/greet.component';
 import { ErrorComponent } from './error/error.component';
 import { TodosListComponent } from './todos-list/todos-list.component';
+import { LogoutComponent } from './logout/logout.component';
+import { HomeComponent } from '../app/home/home.component';
+import { RouteGuardService } from '../app/service/route-guard.service';
 
 const routes: Routes = [
-  {path:'', component: LoginComponent},
+  {path:'', component: GreetComponent, canActivate:[RouteGuardService]},
   {path:'login', component: LoginComponent},
-  {path:'welcome/:name', component:GreetComponent},
-  {path:'todos', component:TodosListComponent},
+  {path:'logout', component: LogoutComponent},
+  {path:'welcome/:name', component:GreetComponent, canActivate:[RouteGuardService]},
+  {path:'todos', component:TodosListComponent, canActivate:[RouteGuardService]},
   {path:'**', component:ErrorComponent}
 ];
 

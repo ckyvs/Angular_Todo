@@ -12,7 +12,7 @@ export class GreetComponent implements OnInit {
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.name = this.route.snapshot.params['name']
+    this.name = sessionStorage.getItem('authenticated user');
     console.log(this.name)
   }
 
