@@ -7,12 +7,14 @@ import { TodosListComponent } from './todos-list/todos-list.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from '../app/home/home.component';
 import { RouteGuardService } from '../app/service/route-guard.service';
+import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
   {path:'', component: GreetComponent, canActivate:[RouteGuardService]},
   {path:'login', component: LoginComponent},
   {path:'logout', component: LogoutComponent},
   {path:'welcome/:name', component:GreetComponent, canActivate:[RouteGuardService]},
+  {path:'todos/:id', component:TodoComponent, canActivate:[RouteGuardService]},
   {path:'todos', component:TodosListComponent, canActivate:[RouteGuardService]},
   {path:'**', component:ErrorComponent}
 ];

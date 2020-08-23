@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TodosListComponent } from '../todos-list/todos-list.component';
 
 @Component({
   selector: 'app-greet',
@@ -9,11 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 export class GreetComponent implements OnInit {
 
   name=''
+  customMsg=''
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.name = sessionStorage.getItem('authenticated user');
     console.log(this.name)
+  }
+
+  getCustomMsg() {
+    console.log("this works");
   }
 
 }

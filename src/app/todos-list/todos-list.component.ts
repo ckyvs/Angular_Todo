@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoDataService } from '../service/data/todo-data.service'
+import { Router } from '@angular/router';
 
 export class Todo {
-  constructor(public id:number, public description:string, public isDone:boolean, public targetDate:Date) {
+  constructor(public id:number, public description:string, public targetDate:Date, public isDone:boolean) {
 
   }
 }
@@ -12,18 +14,45 @@ export class Todo {
 })
 export class TodosListComponent implements OnInit {
 
-  todos = [
-    new Todo(1, 'Reach target to complete writing the book', false, new Date),
-    new Todo(2, 'Reach target to read a book', false, new Date),
-    new Todo(3, 'Reach target to complete code target', false, new Date)
-  ]
+  todos : Todo[]
   // todo = {
   //   id : 1,
   //   task : 'write'
   // }
-  constructor() { }
+
+  message:string;
+  constructor(
+    private todoService:TodoDataService,
+    private router : Router
+  ) { }
 
   ngOnInit(): void {
+    this.refreshTodos();
+  }
+  refreshTodos() {
+    this.todoService.retrieveAllTodos('ck').subscribe(
+      res=>{
+        this.todos=res;
+        console.log(this.todos)
+      }
+    )
   }
 
+  updateTodo(id) {
+    console.log(`updated ${id}`)
+    this.router.navigate(['todos', id])
+  }
+
+  deleteTodo(id) {
+    this.todoService.deleteTodoFromService(id, 'ck').subscribe(
+      (res) => {
+        console.log(res);
+        this.message=`Todo ${id} deleted Successfully!`;
+        this.refreshTodos();
+      }
+    );
+  }
+  addTodo() {
+    this.router.navigate(['todos', 0])
+  }
 }
